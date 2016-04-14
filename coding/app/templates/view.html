@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+        <head>
+                <title>mldev</title>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+                <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css"/>
+                <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        </head>
+        <body>
+                <div class="container">
+                        <h3>{{ user }} <span id="label">{{ response }}</span></h3>
+                        {{ table|safe }}
+                </div>
+                <script>
+                        var response = "{{ response }}"
+                        var labelClass = (response == "1" ? "label label-success" : "label label-danger");
+                        var id = "{{ id }}";
+                        var model = "{{ model }}";
+                        var page = "{{ page }}";
+                        document.getElementById("label").setAttribute("class", labelClass);
+                        window.onkeypress = function(e) {
+                                if (e.keyCode == 13) {
+                                        var next = Number(page) + 1;
+                                        location.href = "{{ url_for('view', id=id, model=model) }}" + "?page=" + next;
+                                }
+                        }
+                </script>
+        </body>
+</html>

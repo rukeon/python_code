@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+        <h1> tag_1_black :  {{ tag_1_black }} </h1>
+        <h1> tag_1_red : {{ tag_1_red }} </h1>
+        <h1> tag_0_black : {{ tag_0_black }} </h1>
+        <h1> tag_0_red : {{ tag_0_red }} </h1>
+        <h3> RESULT_1 :  {{ result1 }}</h3>
+        <h3> RESULT_0 :  {{ result0 }}</h3>
+        <table>
+                <thead>
+                        <tr>
+                                <th>UserId</th>
+                                <th>Tag</th>
+                                <th>Answer</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        {% for result in results %}
+                        <tr>
+                                <td>{{ result.user_id }}</td>
+                                <td>{{ result.tag     }}</td>
+                                <td>{{ result.ans     }}</td>
+                        </tr>
+                        {% endfor %}
+                </tbody>
+        </table>
+
+</body>
+
+</html>

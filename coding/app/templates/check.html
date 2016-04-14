@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+        <head>
+                <title>mldev</title>
+                <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+                <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css"/>
+                <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        </head>
+        <body>
+                <div class="container">
+                        <h3>{{ user }} <span id="label">{{ response }}</span></h3>
+                        {{ table|safe }}
+                </div>
+                <script>
+                        var response = "{{ response }}"
+                        var labelClass = (response == "1" ? "label label-success" : "label label-danger");
+                        document.getElementById("label").setAttribute("class", labelClass);
+                        window.onkeypress = function(e) {
+                                var data = {};
+                                data["user"] = "{{ user }}"
+                                data["tag"] = response;
+                                data["ans"] = "T";
+                                if (e.keyCode == 13) {
+                                        $.ajax({
+                                        url: "show",
+                                        type: "POST",
+                                        data: JSON.stringify(data),
+                                        contentType: "application/json;charset=UTF-8",
+                                        cache: false,
+                                        success: function(response) {
+                                                location.reload();
+                                                $(document).scrollTop(0);
+                                        },
+                                        error: function(response) {}
+                                });
+                                //location.href = "{{ url_for('show') }}";
+                                }
+                                if (e.keyCode == 102) { // 'f'
+                                        data["ans"] = "F";
+                                        $.ajax({
+                                        url: "show",
+                                        type: "POST",
+                                        data: JSON.stringify(data),
+                                        contentType: "application/json;charset=UTF-8",
+                                        cache: false,
+                                        success: function(response) {
+                                                location.reload();
+                                                $(document).scrollTop(0);
+                                        },
+                                        error: function(response) {}
+                                });
+                                }
+                        }
+                </script>
+        </body>
+</html>
+~         
