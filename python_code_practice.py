@@ -14,4 +14,6 @@ def myreducer(fnc, seq):
 
 myreducer( (lambda x, y: x*y), [1,2,3,4])
 
-
+#3 squared sum
+def ss(nums):
+	return sum(x**2 for x in nums)
